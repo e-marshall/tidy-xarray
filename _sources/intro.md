@@ -1,4 +1,4 @@
-# Tidy xarray geospatial cubes
+# Tidy geospatial cubes
 
 ```{note}
 just adding some filler text to this/other pages for now
