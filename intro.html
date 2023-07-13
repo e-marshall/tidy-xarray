@@ -63,7 +63,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tidy Xarray" href="tidy-xarray.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -148,12 +147,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tidy-xarray.html">Tidy Xarray</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tidy_hls.html">Example 3:S Harmonized Landsat-Sentinel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tidy_itslive.html">Example 2: ITS_LIVE</a></li>
-</ul>
-
+        
     </div>
 </nav></div>
     </div>
@@ -346,22 +340,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-tidy-data">What is tidy data?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-it-for-gridded-geospatial-data">Why do we need it for gridded geospatial data?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geospatial-datasets-are-large-complex-and-can-be-cumbersome-to-work-with-especially-for-people-learning-python-xarray">Geospatial datasets are large, complex and can be cumbersome to work with, especially for people learning python / xarray.</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-could-a-tidy-framework-help-users-of-geospatial-array-data">How could a tidy framework help users of geospatial array data?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-tidying-data">Examples of tidying data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonized-landsat-sentinel">1. <span class="xref myst">Harmonized Landsat sentinel</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aquarius">2. <span class="xref myst">Aquarius</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#its-live">3. <span class="xref myst">ITS_LIVE</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aquarius">1. Aquarius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ase-ice-velocity">2. ASE Ice Velocity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonized-landsat-sentinel">3. Harmonized Landsat sentinel</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tidying-steps-for-geospatial-raster-data">Common ‘tidying’ steps for geospatial raster data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-know-if-something-should-be-a-dimension-coordinate-or-data-variable">How to know if something should be a dimension, coordinate or data variable?</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-core-concepts-of-tidy-geospatial-data-cubes">What are the core concepts of tidy geospatial data cubes?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caveats-and-issues">Caveats and issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
             </nav>
         </div>
@@ -375,75 +361,42 @@ document.write(`
                   
   <section id="tidy-geospatial-cubes">
 <h1>Tidy geospatial cubes<a class="headerlink" href="#tidy-geospatial-cubes" title="Permalink to this headline">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>just adding some filler text to this/other pages for now</p>
-</div>
-<p>This Jupyter Book accompanies the 2023 SciPy presentation <code class="docutils literal notranslate"><span class="pre">Tidy</span> <span class="pre">Geospatial</span> <span class="pre">Cubes</span></code>. Here you will find introductory material, information on how to access the example datasets used in the presentation and jupyter notebook examples of the dataset tidying steps and concepts we discuss in the presentation.</p>
-<p>brainstorming notes and draft google slides can be found <a class="reference external" href="https://docs.google.com/presentation/d/1mDS_NWNyJBXVnehe5fQYZdHw4fQ1_j9DkqTLfPbpjvs/edit?usp=sharing">here</a></p>
+<p>This Jupyter Book accompanies the 2023 SciPy presentation <code class="docutils literal notranslate"><span class="pre">Tidy</span> <span class="pre">Geospatial</span> <span class="pre">Cubes</span></code>. Here you will find jupyter notebook examples of the dataset tidying steps and concepts we discuss in the presentation.</p>
 <section id="what-is-tidy-data">
 <h2>What is tidy data?<a class="headerlink" href="#what-is-tidy-data" title="Permalink to this headline">#</a></h2>
 <p>The concept of <a class="reference external" href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy data</a> was developed by Hadley Wickham for the R programming language, and is a set of principles to guide facilitating tabular data for analysis.</p>
-</section>
-<section id="why-do-we-need-it-for-gridded-geospatial-data">
-<h2>Why do we need it for gridded geospatial data?<a class="headerlink" href="#why-do-we-need-it-for-gridded-geospatial-data" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>copy here from slideshow and expand:</p></li>
-</ul>
-<section id="geospatial-datasets-are-large-complex-and-can-be-cumbersome-to-work-with-especially-for-people-learning-python-xarray">
-<h3>Geospatial datasets are large, complex and can be cumbersome to work with, especially for people learning python / xarray.<a class="headerlink" href="#geospatial-datasets-are-large-complex-and-can-be-cumbersome-to-work-with-especially-for-people-learning-python-xarray" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Community sentiment (AGU convos, Tim Crone Pangeo showcase 2/15) that the hardest part of learning to use xarray is conceptualizing xarray structures and how to coerce your data into them</p>
-<ul>
-<li><p>What are coordinates, dimensions, variables? How do they all inter-relate?</p></li>
-<li><p>How to structure your data within the xarray framework</p></li>
-<li><p>How to store metadata</p></li>
-<li><p>Others?</p></li>
-<li><p>Some info about dataset size, complexity, maybe a schematic</p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="examples-of-tidying-data">
-<h2>Examples of tidying data<a class="headerlink" href="#examples-of-tidying-data" title="Permalink to this headline">#</a></h2>
-<section id="harmonized-landsat-sentinel">
-<h3>1. <a class="reference internal" href="tidy_hls.html"><span class="doc std std-doc">Harmonized Landsat sentinel</span></a><a class="headerlink" href="#harmonized-landsat-sentinel" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="aquarius">
-<h3>2. <a class="reference internal" href="tidy-xarray.html"><span class="doc std std-doc">Aquarius</span></a><a class="headerlink" href="#aquarius" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="its-live">
-<h3>3. <a class="reference internal" href="tidy_itslive.html"><span class="doc std std-doc">ITS_LIVE</span></a><a class="headerlink" href="#its-live" title="Permalink to this headline">#</a></h3>
-</section>
-</section>
-<section id="common-tidying-steps-for-geospatial-raster-data">
-<h2>Common ‘tidying’ steps for geospatial raster data<a class="headerlink" href="#common-tidying-steps-for-geospatial-raster-data" title="Permalink to this headline">#</a></h2>
-<ol class="arabic simple">
-<li><p>data is normally stored such that individual observations or time-steps are organized as individual files. To construct a usable ‘data cube’ one will need to read and organize many files</p></li>
-<li><p>individual file names will often contain important metadata that needs to be used for indexing and selection later – how to store it?</p></li>
-</ol>
-<section id="how-to-know-if-something-should-be-a-dimension-coordinate-or-data-variable">
-<h3>How to know if something should be a dimension, coordinate or data variable?<a class="headerlink" href="#how-to-know-if-something-should-be-a-dimension-coordinate-or-data-variable" title="Permalink to this headline">#</a></h3>
-<p>Complicated, but when in doubt, good rule is:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. dimensional coordinates (ie. `dims`) should be `(x,y,time)`  
-2. non-dimensional coordinates (`coords`) should be anything that provides information about the independent data you are hoping to observe, but might not be fundamental to the shape/structure of your &#39;data cube&#39;. Examples could be: imaging mode, polarization, temporal baseline. Often times, this information will be stored in the original filename, or potentially as an attribute. If it is something you might want to use for indexing or selection down the line, it is best to store that information as a non-dimensional coord.   
-3. Independent data variables (observables such as temperature, salinity, magnitude of velocity, reflectance, backscatter ...) should be stored as `data_vars`.
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Tidy datasets are all alike but every messy dataset is messy in its own way.&quot;</span> <span class="o">-</span> <span class="n">Wickham</span><span class="p">,</span> <span class="mi">2014</span>
 </pre></div>
 </div>
 </section>
-</section>
-<section id="what-are-the-core-concepts-of-tidy-geospatial-data-cubes">
-<h2>What are the core concepts of tidy geospatial data cubes?<a class="headerlink" href="#what-are-the-core-concepts-of-tidy-geospatial-data-cubes" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="caveats-and-issues">
-<h2>Caveats and issues<a class="headerlink" href="#caveats-and-issues" title="Permalink to this headline">#</a></h2>
+<section id="how-could-a-tidy-framework-help-users-of-geospatial-array-data">
+<h2>How could a tidy framework help users of geospatial array data?<a class="headerlink" href="#how-could-a-tidy-framework-help-users-of-geospatial-array-data" title="Permalink to this headline">#</a></h2>
+<p>Geospatial datasets can be large, complex and cumbersome to work with, especially with users who are new to python/xarray. Conversations at conferences, Pangeo community meetings and elsewhere highlight the common experience that hardest part of learning (and teaching) xarray is conceptualizing xarray data structures and understanding how to coerce one’s data into them. Specifically, this comes down to:</p>
 <ul class="simple">
-<li><p>what if there is ‘contextual’ info or metadata that you’d like to be able to index and select on, but there are duplicate values? eg. elevation, or coverage % – best to keep those as vars?</p></li>
+<li><p>What are coordinates, dimensions, variables, and attributes? How do they all inter-relate?</p></li>
+<li><p>How to structure your data within the xarray framework</p></li>
+<li><p>How to store metadata</p></li>
 </ul>
+<p>In particular, we see a lot of duplicated effort, and hence, potential utility in a ‘tidy’ framework or tidy guidelines, in the initial data processing steps of assembling downloaded data (usually divided on disc into temporal observations, or spatial subsets) into logical cubes with an (x,y,time) structure. Gridded n-dimensional datasets as they are accessed from data providers are often separated into temporal observations and spatial subsets. Most workflows will involve some sort of merging and concatenation of these objects. At minimum,</p>
+<p>Where we see a specific utility for a tidy framework is in steps to prepare gridded datasets for analysis. Datasets downloaded or accessed from DAACs and other providers are often (for good reason) separated into temporal observations or spatial subsets. This minimizes the services that must be provided for different datasets and allows users to access just the material that they need. But we know that most workflows will involve spatial and/or temporal investigation of an observable, which will usually require the analyst to arrange individual files into spatial mosaics and/or temporal cubes.</p>
+<p>If most workflows contain the aforementioned steps, at minimum, this represents a large degree of duplicated effort across users. It also introduces many decision-points that can be stumbling blocks for newer users. We hope that a tidy framework for array data in xarray could streamline this process by providing a specific expectation of what a ‘tidy’ or ‘analysis-ready’ dataset looks like as well as common patterns and tools that one can use to arrive at this structure.</p>
 </section>
-<div class="toctree-wrapper compound">
-</div>
+<section id="examples-of-tidying-data">
+<h2>Examples of tidying data<a class="headerlink" href="#examples-of-tidying-data" title="Permalink to this headline">#</a></h2>
+<section id="aquarius">
+<h3>1. <a class="reference external" href="https://gist.github.com/dcherian/66269bc2b36c2bc427897590d08472d7">Aquarius</a><a class="headerlink" href="#aquarius" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="ase-ice-velocity">
+<h3>2. <a class="reference external" href="https://tutorial.xarray.dev/data_cleaning/ice_velocity.html">ASE Ice Velocity</a><a class="headerlink" href="#ase-ice-velocity" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="harmonized-landsat-sentinel">
+<h3>3. <a class="reference external" href="https://nbviewer.org/gist/scottyhq/efd583d66999ce8f6e8bcefa81545b8d">Harmonized Landsat sentinel</a><a class="headerlink" href="#harmonized-landsat-sentinel" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h2>
+<p>We hope this is just the beginning of a conversation on what <code class="docutils literal notranslate"><span class="pre">tidy</span></code> xarray datasets could look like. Please reach out to us (via email or github), and share your experiences, thoughts, and opinions about these ideas! We recognize that these ‘data tidying steps’ (preparing data for analysis) are things that many of us have been doing for years and developing our own strategies for. We see this as an exciting opportunity to leverage individual knowledge and experiences toward a community structure that hopefully helps user experiences in the future.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -477,15 +430,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="right-next"
-       href="tidy-xarray.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tidy Xarray</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
@@ -505,22 +449,14 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-tidy-data">What is tidy data?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-it-for-gridded-geospatial-data">Why do we need it for gridded geospatial data?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geospatial-datasets-are-large-complex-and-can-be-cumbersome-to-work-with-especially-for-people-learning-python-xarray">Geospatial datasets are large, complex and can be cumbersome to work with, especially for people learning python / xarray.</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-could-a-tidy-framework-help-users-of-geospatial-array-data">How could a tidy framework help users of geospatial array data?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-tidying-data">Examples of tidying data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonized-landsat-sentinel">1. <span class="xref myst">Harmonized Landsat sentinel</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aquarius">2. <span class="xref myst">Aquarius</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#its-live">3. <span class="xref myst">ITS_LIVE</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aquarius">1. Aquarius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ase-ice-velocity">2. ASE Ice Velocity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonized-landsat-sentinel">3. Harmonized Landsat sentinel</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tidying-steps-for-geospatial-raster-data">Common ‘tidying’ steps for geospatial raster data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-know-if-something-should-be-a-dimension-coordinate-or-data-variable">How to know if something should be a dimension, coordinate or data variable?</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-core-concepts-of-tidy-geospatial-data-cubes">What are the core concepts of tidy geospatial data cubes?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caveats-and-issues">Caveats and issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
   </nav></div>
 
