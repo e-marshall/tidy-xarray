@@ -4,7 +4,7 @@ This Jupyter Book accompanies the 2023 SciPy presentation `Tidy Geospatial Cubes
 
 ## What is tidy data? 
 
-The concept of [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf) was developed by Hadley Wickham for the R programming language, and is a set of principles to guide facilitating tabular data for analysis. 
+The concept of [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf) was developed by Hadley Wickham in the R programming language, and is a set of principles to guide facilitating tabular data for analysis. 
 
 ```
 "Tidy datasets are all alike but every messy dataset is messy in its own way." - Wickham, 2014
