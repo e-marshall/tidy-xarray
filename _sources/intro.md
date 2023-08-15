@@ -1,37 +1,62 @@
-# Tidy geospatial cubes
+# Tidy xarray geospatial cubes
 
-This Jupyter Book accompanies the 2023 SciPy presentation `Tidy Geospatial Cubes`. Here you will find jupyter notebook examples of the dataset tidying steps and concepts we discuss in the presentation. 
+## Purpose
 
-## What is tidy data? 
+Array data that is represented by Xarray objects is often multivariate, multi-dimensional and very complex. Part of the beauty of Xarray as that it is adaptable and scalable to represent a large number of data structures. But this can also introduce difficulty (especially for learning users) arriving at a workable structure that will be suitable for your analytical needs. 
 
-The concept of [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf) was developed by Hadley Wickham in the R programming language, and is a set of principles to guide facilitating tabular data for analysis. 
+This project is motivated by community sentiment and experiences that oftentimes, the hardest part of learning and teaching Xarray is teaching users how best to use Xarray conceptually. 
 
-```
-"Tidy datasets are all alike but every messy dataset is messy in its own way." - Wickham, 2014
-```
-## How could a tidy framework help users of geospatial array data?
+In this section, we discuss common characteristics of gridded datasets and what 'tidy' data looks like and means in this context. 
 
-Geospatial datasets can be large, complex and cumbersome to work with, especially with users who are new to python/xarray. Conversations at conferences, Pangeo community meetings and elsewhere highlight the common experience that hardest part of learning (and teaching) xarray is conceptualizing xarray data structures and understanding how to coerce one's data into them. Specifically, this comes down to:
-  - What are coordinates, dimensions, variables, and attributes? How do they all inter-relate?
-  - How to structure your data within the xarray framework
-  - How to store metadata 
+## A brief primer on tidy data
 
-In particular, we see a lot of duplicated effort, and hence, potential utility in a 'tidy' framework or tidy guidelines, in the initial data processing steps of assembling downloaded data (usually divided on disc into temporal observations, or spatial subsets) into logical cubes with an (x,y,time) structure. Gridded n-dimensional datasets as they are accessed from data providers are often separated into temporal observations and spatial subsets. Most workflows will involve some sort of merging and concatenation of these objects. At minimum,
+Tidy data was developed by Hadley Wickham for tabular datasets in the R programming language. There are great resources that comprehensively explain this concept and the ecosystem of tools built upon it. Below is a very brief explanation:
+
+**Data tidying** is the process of structuring datasets to facilitate analysis. Wickham writes: "...tidy datasets are all alike but every messy dataset is messy in its own way. Tidy datasets provide a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning)" (Wickham, 2014). 
+
+### Tidy data principles for tabular datasets
+
+Wickham defines 3 core principles of tidy data for tabular principles. They are:
+
+1. Each variable forms an observation
+2. Each observation forms a row
+3. Each type of observational unit forms a table
+
+**Our goal is to imagine what 'tidy data' would look like for gridded datasets**
 
 
-Where we see a specific utility for a tidy framework is in steps to prepare gridded datasets for analysis. Datasets downloaded or accessed from DAACs and other providers are often (for good reason) separated into temporal observations or spatial subsets. This minimizes the services that must be provided for different datasets and allows users to access just the material that they need. But we know that most workflows will involve spatial and/or temporal investigation of an observable, which will usually require the analyst to arrange individual files into spatial mosaics and/or temporal cubes. 
+## Common use-case: individual observations to a x-y-time datacube
 
-If most workflows contain the aforementioned steps, at minimum, this represents a large degree of duplicated effort across users. It also introduces many decision-points that can be stumbling blocks for newer users. We hope that a tidy framework for array data in xarray could streamline this process by providing a specific expectation of what a 'tidy' or 'analysis-ready' dataset looks like as well as common patterns and tools that one can use to arrive at this structure. 
+Data downloaded or accessed from DAACs and other providers is often (for good reason) separated into temporal observations or spatial subsets. This minimizes the services that must be provided for different datasets and allows the user to access just the material that they need. However, most workflows will involve some sort of spatial and/or temporal investigation of an observable, which will usually require the analyst to arrange individual files into spatial mosaics and/or temporal cubes. In addition to being a source of duplicated effort and work, these steps also introduce decision-points that can be stumbling blocks for newer users. We hope a tidy framework for xarray will streamline the process of preparing data for analysis by providing specific expectations of what 'tidied' datasets look like as well as common patterns and tools to use to arrive at a tidy state. 
 
-## Examples of tidying data
+## Tidy data principles for Xarray data structures
 
-### 1. [Aquarius](https://gist.github.com/dcherian/66269bc2b36c2bc427897590d08472d7)
-### 2. [ASE Ice Velocity](https://tutorial.xarray.dev/data_cleaning/ice_velocity.html)
-### 3. [Harmonized Landsat sentinel](https://nbviewer.org/gist/scottyhq/efd583d66999ce8f6e8bcefa81545b8d)
+These are guidelines to keep in mind while you are organizing your data. To see the examples that were used to develop these principles, go [here]. 
 
-## Notes
+**1. Dimensions** 
+- Minimize the number of dimensional coordinates
 
-We hope this is just the beginning of a conversation on what `tidy` xarray datasets could look like. Please reach out to us (via email or github), and share your experiences, thoughts, and opinions about these ideas! We recognize that these 'data tidying steps' (preparing data for analysis) are things that many of us have been doing for years and developing our own strategies for. We see this as an exciting opportunity to leverage individual knowledge and experiences toward a community structure that hopefully helps user experiences in the future. 
+**2. Coordinates**
+- Non-dimensional coordinates can be numerous. Each should exist along one or multiple dimensions
 
-SciPy 2023 presentation slides [here](https://docs.google.com/presentation/d/e/2PACX-1vROHgszqaKr-TM5cRKUCDnprRw9Uc2vakZJVuE7-QhjFf4_GiNuMaLPH4yj_-lQdt6u40KGNuUiNxyI/pub?start=false&loop=false&delayms=3000#slide=id.g2314f44127a_0_532).
+**3. Data Variables**
+- Data variables should be observables rather than contextual. Each should exist along one or multiple dimensions.
 
+**4. Contextual information (metadata)**
+- Metadata should only be stored as an attribute if it is static along the dimensions to which it is applied.
+- If metadata is dynamic, it should be stored as a coordinate variable.
+
+**5. Variable, attribute naming**
+- **Wherever possible, use cf-conventions for naming**
+- Variable names should be descriptive
+- VAriable names should not contain information that belongs in a dimension or coordinate (ie. information stored in a variable name should be reduced to only the observable the variable describes.
+
+**6. Make us of & work within the framework of other tools**
+- Tools like STAC, open data cube, cf.xarray, pystac, stackstac (and more) make tidying possible and smoother, especially with large, cloud-optimized datasets.
+
+## Other guidelines and rules of thumb
+
+- Avoid storing important data in filenames
+- None-descriptiev variable names can create + perpetuate confusion
+- Missing coordinate information makes datasets harder to use
+- Elements of a dataset's 'shape'/structure can sometimes be embedded in variable names; this will complicate subsequent analysis
