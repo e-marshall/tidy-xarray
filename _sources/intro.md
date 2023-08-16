@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Array data that is represented by Xarray objects is often multivariate, multi-dimensional and very complex. Part of the beauty of Xarray as that it is adaptable and scalable to represent a large number of data structures. But this can also introduce difficulty (especially for learning users) arriving at a workable structure that will be suitable for your analytical needs. 
+Array data that are represented by Xarray objects is often multivariate, multi-dimensional, and very complex. Part of the beauty of Xarray as that it is adaptable and scalable to represent a large number of data structures. However, this can also introduce difficulty (especially for learning users) in arriving at a workable structure that will be suitable for your analytical needs. 
 
 This project is motivated by community sentiment and experiences that oftentimes, the hardest part of learning and teaching Xarray is teaching users how best to use Xarray conceptually. 
 
@@ -14,7 +14,7 @@ Tidy data was developed by Hadley Wickham for tabular datasets in the R programm
 
 **Data tidying** is the process of structuring datasets to facilitate analysis. Wickham writes: "...tidy datasets are all alike but every messy dataset is messy in its own way. Tidy datasets provide a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning)" (Wickham, 2014). 
 
-### Tidy data principles for tabular datasets
+#### Tidy data principles for tabular datasets
 
 Wickham defines 3 core principles of tidy data for tabular principles. They are:
 
