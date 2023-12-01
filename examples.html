@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Example 1: Aquarius" href="tidy_aquarius.html" />
+    <link rel="next" title="SciPy 2023" href="scipy_talk.html" />
     <link rel="prev" title="Introduction" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -151,10 +151,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tidy_aquarius.html">Example 1: Aquarius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tidy-xarray.html">Tidy Xarray</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tidy_hls.html">Example 3:S Harmonized Landsat-Sentinel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tidy_itslive.html">Example 2: ITS_LIVE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scipy_talk.html">SciPy 2023</a></li>
 </ul>
 
     </div>
@@ -364,14 +361,19 @@ document.write(`
                   
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h1>
+<p>This page contains examples of ‘tidying’ datasets.</p>
 <section id="aquarius">
 <h2>1. Aquarius<a class="headerlink" href="#aquarius" title="Permalink to this headline">#</a></h2>
+<p>This is an example of tidying a dataset comprised of locally downloaded files. Aquarius is a sea surface salinity dataset produced by NASA and accessed as network Common Data Form (NetCDF) files.
+You can find this example <a class="reference external" href="https://gist.github.com/dcherian/66269bc2b36c2bc427897590d08472d7">here</a>. This example focuses on data access steps and organizing data into a workable data cube.</p>
 </section>
 <section id="ase-ice-velocity">
 <h2>2. ASE Ice Velocity<a class="headerlink" href="#ase-ice-velocity" title="Permalink to this headline">#</a></h2>
+<p>Already integrated into the Xarray tutorial, this examples uses an ice velocity dataset derived from synthetic aperture radar imagery. You can find it <a class="reference external" href="https://tutorial.xarray.dev/data_cleaning/ice_velocity.html">here</a>. This example focuses on data access steps and organizing data into a workable data cube.</p>
 </section>
 <section id="harmonized-landsat-sentinel">
 <h2>3. Harmonized Landsat-Sentinel<a class="headerlink" href="#harmonized-landsat-sentinel" title="Permalink to this headline">#</a></h2>
+<p>This <a class="reference external" href="https://nbviewer.org/gist/scottyhq/efd583d66999ce8f6e8bcefa81545b8d">example</a> features cloud-optimized data that does not need to be downloaded locally. Here, package such as <a class="reference external" href="https://github.com/opendatacube/odc-stac"><code class="docutils literal notranslate"><span class="pre">odc-stac</span></code></a> are used to accomplish much of the initial tidying (assembling an x,y,time cube). However, this example shows that there is frequently additional formatting required to make a dataset analysis ready.</p>
 </section>
 </section>
 
@@ -416,11 +418,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="tidy_aquarius.html"
+       href="scipy_talk.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Example 1: Aquarius</p>
+        <p class="prev-next-title">SciPy 2023</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
