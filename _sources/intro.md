@@ -63,10 +63,4 @@ These are guidelines to keep in mind while you are organizing your data. To see 
 
 ## Contributing
 
-<<<<<<< HEAD
-This project is an evolving community effort. **we want to hear from you!**. If reading this description and examples reminded you of your own experiences tidying datasets to prepare them for analysis, please consider submitting an example to our [data tidying gallery](insert page here). Your experience could help other users! 
-=======
-This is an evolving community effort + project, **we want to hear from you!**. If reading this description and examples reminded you of your own experiences tidying datasets to prepare them for analysis, please consider submitting an example to our [data tidying gallery](insert page here). Your experience could help other users! 
-
-
->>>>>>> 5daa77fb078b086af03ab58377ab765295297ffc
+We would love your help and engagement on this project! If you have a dataset that you've worked with that felt particularly messy, or one with steps you find yourself thinking back to as you work with new datasets, consider submitting it as an example! If you have input on tidy principles, please feel free to raise an issue.
